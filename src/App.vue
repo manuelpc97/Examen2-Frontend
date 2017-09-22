@@ -137,7 +137,7 @@ export default {
   			email: '',
   			address: '',
   			phone: '', 
-  			image: '',
+  			image: 'http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png',
   			username: '',
   			password: ''
   		},
@@ -172,6 +172,17 @@ export default {
       this.user.username = this.newPerson.username;
       this.user.password = this.newPerson.password;
       this.logIn();
+      this.newPerson = {
+        name: '',
+        age: '',
+        email: '',
+        address: '',
+        phone: '', 
+        image: 'http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png',
+        username: '',
+        password: ''
+      };
+      $('#Registro').modal('hide');
 		}, response => {
 			alert('Error registering');
 		});
@@ -192,6 +203,8 @@ export default {
           localStorage.setItem('isLogged',true);
           this.logged = true;
           localStorage.setItem('id', response.body.idPerson);
+          this.user.username = '';
+          this.user.password = '';
           this.$router.push({path: '/profile'});
         }, response => {
           alert('Error logging');

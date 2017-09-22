@@ -70,7 +70,7 @@
 				currentElement: {
 					name: '', 
 					description: '', 
-					image: 'img/imageNo.jpg'
+					image: 'http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png'
 				}
 			}
 		},
@@ -95,6 +95,7 @@
 				elementService.updateElement(this.currentElement, this.currentElement.idElement).then(response => {
 					elementService.getElements().then(response => {
 						this.elements = response.body;
+						$('#ModificarElemento').modal('hide');
 					}, response => {
 						alert('Error');
 					});

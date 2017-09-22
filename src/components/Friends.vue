@@ -20,7 +20,7 @@
 					<div class = "ui fluid card" v-for = "element in users">
 						<div class="ui black ribbon label">{{element.name}}</div>
 						<div class="image">
-      						<img src=  "img/imageNo.jpg">
+      						<img src=  "http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png">
     					</div>
     					<div class="content">
       						
@@ -52,7 +52,7 @@
 					<div class = "ui fluid card" v-for = "friend in friends">
 						<div class="ui black ribbon label">{{friend.name}}</div>
 						<div class="image">
-      						<img src=  "img/imageNo.jpg">
+      						<img src=  "http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png">
     					</div>
     					<div class="content">
       						

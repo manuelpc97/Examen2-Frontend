@@ -8,7 +8,7 @@
 			</div>
 				<div class = "ui fluid card">
 					<div class = "small image">
-						<img src="img/imageNo.jpg">
+						<img src="http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png">
 					</div>
 					<div class = "content">
 						<div class = "header">
@@ -95,6 +95,7 @@
 			modify(){
 				personService.updatePerson(this.user, this.user.idPerson). then(response => {
 					alert('Updated')
+					$('#Modificar').modal('hide');
 				}, response => {
 					alert('Error updating');
 				});

@@ -46,7 +46,11 @@
 		methods: {
 			createElement(){
 				elementService.createElement(this.newElement).then(response => {
-
+					this.newElement = {
+					name: '',
+					image: 'img/imageNo.jpg', 
+					description: ''
+				};
 				}, response => {
 					alert('Error creating element');
 				});
