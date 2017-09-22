@@ -5,8 +5,6 @@ import Vue from 'vue'
 import vueRouter from 'vue-router'
 import App from './App.vue'
 import Landing from './components/Landing.vue'
-import Profile from './components/Profile.vue'
-import Friends from './components/Friends.vue'
 import createElement from './components/createElement.vue'
 import Elements from './components/Elements.vue'
 
@@ -17,16 +15,6 @@ const router = new vueRouter({
 			path: '/',
 			name: 'landing', 
 			component: Landing
-		},
-		{
-			path: '/profile', 
-			name: 'profile', 
-			component: Profile
-		},
-		{
-			path: '/friends', 
-			name: 'friends', 
-			component: Friends
 		},
 		{
 			path: '/createElement', 

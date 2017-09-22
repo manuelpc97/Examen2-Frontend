@@ -18,11 +18,11 @@
 						</div>
 						<div class = "field">
 							<label>Tipo</label>
-							<input type="text" v-model = "newElement.tipo">
+							<input type="text" v-model = "newElement.tipo" value = "fision or fusion">
 						</div>
 						<div class = "field">
 							<label>Detonada</label>
-							<input type="text" v-model = "newElement.detonada">
+							<input type="text" v-model = "newElement.detonada" value = "true or false">
 						</div>
 						<div class = "field">
 							<label>Energia</label>

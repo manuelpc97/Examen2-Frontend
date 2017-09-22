@@ -11,6 +11,7 @@
       					</button>
     				</div>
   				</div>
+  				<br>
 				<div class = "ui three cards">
 					<div class = "ui card" v-for = "element in elements">
 						<div class = "image">
