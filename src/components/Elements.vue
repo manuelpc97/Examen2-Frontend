@@ -3,6 +3,14 @@
 		<div class = "ui center aligned grid">
 			<div class = "two wide column"></div>
 			<div class = "twelve wide column">
+				<div class="item">
+    				<div class="ui icon input">
+      					<input type="text" placeholder="No Filter for no filter" v-model = "word">
+      					<button v-on:click = "search()">
+      					<i class="search icon"> </i>
+      					</button>
+    				</div>
+  				</div>
 				<div class = "ui three cards">
 					<div class = "ui card" v-for = "element in elements">
 						<div class = "image">
@@ -23,7 +31,7 @@
 							</div>
 						</div>
 						<div class = "extra content">
-							<div class = "ui two buttons">
+							<div class = "ui three buttons">
 								<div class = "ui red basic button" v-on:click = "deleteE(element)">
 									Eliminar
 								</div>
@@ -102,6 +110,7 @@
 			return{
 				user: {}, 
 				elements: [],
+				word: '',
 				currentElement: {
 							nombre: '',
 							tipo: '',
@@ -165,6 +174,22 @@
 				}, respone => {
 					alert('Error');
 				})
+			},
+			search(){
+				this.elements = [];
+				elementService.getElements().then(response => {
+					for(let i = 0; i < response.body.length; i++){
+						if(response.body[i].nombre === this.word || response.body[i].peso === this.word || response.body[i].tipo === this.word || response.body[i].detonada+'' === this.word || response.body[i].lugar === this.word || response.body[i].energia+'' === this.word){
+							this.elements.push(response.body[i]);
+						}
+					}
+					if(this.elements.length === 0){
+						alert('Not Found');
+						this.elements = response.body;
+					}
+				}, response => {
+					alert('Error');
+				});
 			}
 		}, 
 		beforeCreate(){
