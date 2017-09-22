@@ -99,11 +99,16 @@
 			}
 		}, 
 		beforeCreate(){
-			personService.getPersonById(localStorage.getItem('id')).then(response => {
-				this.user = response.body[0];
-			}, response => {
-				alert('Error');
-			});
+			if(JSON.parse(localStorage.getItem('id')) === 0){
+				console.log('No esta loggeado');
+				this.$router.push('/');
+			}else{
+				personService.getPersonById(localStorage.getItem('id')).then(response => {
+					this.user = response.body[0];
+				}, response => {
+					alert('Error');
+				});	
+			}
 		}
 	}
 </script>

@@ -194,24 +194,29 @@
 			}
 		}, 
 		beforeCreate(){
-			personService.getPersonById(localStorage.getItem('id')).then(response => {
-				this.user = response.body[0];
-			}, response => {
-				alert('Error');
-			});
+			if(JSON.parse(localStorage.getItem('id')) === 0){
+				console.log('No esta loggeado');
+				this.$router.push('/');
+			}else{	
+				personService.getPersonById(localStorage.getItem('id')).then(response => {
+					this.user = response.body[0];
+				}, response => {
+					alert('Error');
+				});
 
-			elementService.getElements().then(response => {
-				for(let i = 0; i < response.body.length; i++){
-					if(response.body[i].detonada === true){
-						response.body[i].detonada = 'Si';
-					}else{
-						response.body[i].detonada = 'No';
+				elementService.getElements().then(response => {
+					for(let i = 0; i < response.body.length; i++){
+						if(response.body[i].detonada === true){
+							response.body[i].detonada = 'Si';
+						}else{
+							response.body[i].detonada = 'No';
+						}
 					}
-				}
-				this.elements = response.body;
-			}, response => {
-				alert('Error');
-			});
+					this.elements = response.body;
+				}, response => {
+					alert('Error');
+				});	
+			}
 		}	
 	}
 </script>
