@@ -76,7 +76,7 @@
 					alert('Error creating element');
 				});
 				}else{
-					alert('Campos erroneos');
+					alert('Campos erroneos, TIPO DEBE SER fusion o fision; y DETONADA debe ser true o false');
 				}
 				
 			},
