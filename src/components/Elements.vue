@@ -10,10 +10,16 @@
 						</div>
 						<div class = "content">
 							<div class  ="header">
-								{{element.name}}
+								{{element.nombre}}
+							</div>
+							<div class = "meta">
+								<a>Peso: {{element.peso}}</a><br>
+								<a>Energia: {{element.energia}}</a><br>
 							</div>
 							<div class = "description">
-								{{element.description}}
+								Tipo: {{element.tipo}}<br>
+								Detonada: {{element.detonada}}<br>
+								Lugar: {{element.lugar}}<br>
 							</div>
 						</div>
 						<div class = "extra content">
@@ -23,6 +29,9 @@
 								</div>
 								<div class = "ui blue basic button" v-on:click = "showModal(element)">
 									Modificar
+								</div>
+								<div class = "ui green basic button" v-on:click = "showDetonar(element)">
+									Detonar
 								</div>
 							</div>
 						</div>
@@ -42,16 +51,42 @@
       				<div class = "ui form">
 						 <br>
       					<div class = "field">
-      						<input type="text" placeholder = "Name" v-model = "currentElement.name">
+      					<label>Nombre</label>
+      						<input type="text" placeholder = "Nombre" v-model = "currentElement.nombre">
       					</div>
       					<div class = "field">
-      						<input type="text" placeholder = "description" v-model = "currentElement.description">
+      					<label>Peso</label>
+      						<input type="text" placeholder = "Peso" v-model = "currentElement.peso">
+      					</div>
+      					<div class = "field">
+      					<label>Tipo</label>
+      						<input type="text" placeholder = "Tipo" v-model = "currentElement.tipo">
+      					</div>
+      					<div class = "field">
+      					<label>Detonada</label>
+      						<input type="text" placeholder = "Detonada" v-model = "currentElement.detonada">
+      					</div>
+      					<div class = "field">
+      					<label>Energia</label>
+      						<input type="text" placeholder = "Energia" v-model = "currentElement.energia">
       					</div>
       				</div>
       				<div class = "ui blue button" v-on:click = "modifyE()">
       					Modificar
       				</div>
       			</div>
+      		</div>
+      	</div>
+      	<div class = "ui modal" id = "detonacion">
+      	<i class = "close icon"></i>
+      		<div class = "header">
+      			<div class ="ui form">
+      				<div class = "field">
+      					<label>Ingrese ciudad: </label>
+      					<input type="text" v-model = "currentElement.lugar">
+      				</div>
+      			</div>
+      			<div class ="ui basic red button" v-on:click = "detonar()">detonar</div>
       		</div>
       	</div>
 	</div>
@@ -68,16 +103,31 @@
 				user: {}, 
 				elements: [],
 				currentElement: {
-					name: '', 
-					description: '', 
-					image: 'http://icons.iconarchive.com/icons/artua/dragon-soft/512/User-icon.png'
-				}
+							nombre: '',
+							tipo: '',
+							peso: '',
+							detonada: '',
+							lugar: '',
+							energia: ''
+						}
 			}
 		},
 		methods: {
 			showModal(element){
 				this.currentElement = element;
 				$('#ModificarElemento').modal('show');
+			},
+			showDetonar(element){
+				this.currentElement = element;
+				if(this.currentElement.detonada === 'No'){
+					$('#detonacion').modal('show');
+				}else{
+					alert('La bomba ya ha sido detonada');
+				}
+			},
+			detonar(){
+				this.currentElement.detonada = true;
+				this.modifyE();
 			},
 			deleteE(element){
 				elementService.deleteElement(element.idElement).then(response => {
@@ -92,8 +142,20 @@
 				});
 			},
 			modifyE(){
+				if(this.currentElement.detonada === 'Si'){
+					this.currentElement.detonada = true;
+				}else if(this.currentElement.detonada === 'No'){
+					this.currentElement.detonada = false;
+				}
 				elementService.updateElement(this.currentElement, this.currentElement.idElement).then(response => {
 					elementService.getElements().then(response => {
+						for(let i = 0; i < response.body.length; i++){
+							if(response.body[i].detonada === true ){
+								response.body[i].detonada = 'Si';
+							}else{
+								response.body[i].detonada = 'No';
+							}
+						}
 						this.elements = response.body;
 						$('#ModificarElemento').modal('hide');
 					}, response => {
@@ -113,6 +175,13 @@
 			});
 
 			elementService.getElements().then(response => {
+				for(let i = 0; i < response.body.length; i++){
+					if(response.body[i].detonada === true){
+						response.body[i].detonada = 'Si';
+					}else{
+						response.body[i].detonada = 'No';
+					}
+				}
 				this.elements = response.body;
 			}, response => {
 				alert('Error');

@@ -9,12 +9,24 @@
 					<br>
 					<div class = "ui form">
 						<div class = "field">
-							<label>Name</label>
-							<input type="text" v-model = "newElement.name">
+							<label>Nombre</label>
+							<input type="text" v-model = "newElement.nombre">
 						</div>
 						<div class = "field">
-							<label>Description</label>
-							<input type="text" v-model = "newElement.description">
+							<label>Peso</label>
+							<input type="text" v-model = "newElement.peso">
+						</div>
+						<div class = "field">
+							<label>Tipo</label>
+							<input type="text" v-model = "newElement.tipo">
+						</div>
+						<div class = "field">
+							<label>Detonada</label>
+							<input type="text" v-model = "newElement.detonada">
+						</div>
+						<div class = "field">
+							<label>Energia</label>
+							<input type="text" v-model = "newElement.energia">
 						</div>
 					</div>
 					<br>
@@ -37,23 +49,53 @@
 			return{
 				user: {},
 				newElement: {
-					name: '',
-					image: 'img/imageNo.jpg', 
-					description: ''
+					nombre: '',
+					tipo: '',
+					peso: '',
+					detonada: '',
+					lugar: '',
+					energia: ''
 				}
 			}
 		},
 		methods: {
 			createElement(){
-				elementService.createElement(this.newElement).then(response => {
-					this.newElement = {
-					name: '',
-					image: 'img/imageNo.jpg', 
-					description: ''
-				};
+				if(this.verifyTipo() && this.verifyDetonada()){
+					console.log('Entro');
+					elementService.createElement(this.newElement).then(response => {
+						this.newElement = {
+							nombre: '',
+							tipo: '',
+							peso: '',
+							detonada: '',
+							lugar: '',
+							energia: ''
+						};
+						alert('Exito');
 				}, response => {
 					alert('Error creating element');
 				});
+				}else{
+					alert('Campos erroneos');
+				}
+				
+			},
+			verifyTipo(){
+				if(this.newElement.tipo === 'fusion' || this.newElement.tipo === 'fision'){
+					return true;
+				}
+				return false;
+			},
+			verifyDetonada(){
+				if(this.newElement.detonada === 'true' || this.newElement.detonada === 'false'){
+					if(this.newElement.detonada === 'true'){
+						this.newElement.detonada === true;
+					}else{
+						 this.newElement.detonada === false;
+					}
+					return true;
+				}
+				return false;
 			}
 		}, 
 		beforeCreate(){
