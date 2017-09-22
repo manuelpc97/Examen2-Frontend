@@ -23,5 +23,11 @@ export default{
 	}, 
 	getPersonByName(name){
 		return Vue.http.get(url + 'PersonByName/' + name);
+	},
+	addFriend(friend,idPerson){
+		return Vue.http.put(url + 'addFriend/' + idPerson, friend);
+	},
+	deleteFriend(friend,idPerson){
+		return Vue.http.put(url + 'deleteFriend/' + idPerson, friend);
 	}
 }

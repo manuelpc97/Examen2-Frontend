@@ -6,6 +6,7 @@ import vueRouter from 'vue-router'
 import App from './App.vue'
 import Landing from './components/Landing.vue'
 import Profile from './components/Profile.vue'
+import Friends from './components/Friends.vue'
 
 Vue.use(vueRouter);
 const router = new vueRouter({
@@ -19,6 +20,11 @@ const router = new vueRouter({
 			path: '/profile', 
 			name: 'profile', 
 			component: Profile
+		},
+		{
+			path: '/friends', 
+			name: 'friends', 
+			component: Friends
 		}
 	]
 });

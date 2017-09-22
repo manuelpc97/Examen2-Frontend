@@ -20,9 +20,16 @@
 	</div>
 
   <div class = "ui inverted large menu" v-show = "logged">
+    <router-link to = "/profile">
     <div class = "item">
       <a>Perfil</a>
     </div>
+    </router-link>
+    <router-link to = "/friends">
+    <div class = "item">
+      <a>Agregar Amigos</a>
+    </div>
+    </router-link>
     <router-link to = "/">
       <div class = "item" v-on:click = "logOut()">
         <a>LogOut</a>
