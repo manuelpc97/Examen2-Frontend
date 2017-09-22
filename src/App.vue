@@ -76,7 +76,7 @@
 
       <div class = "ui modal" id = "Registro">
       	<i class = "close icon"></i>
-      	<div class = "header">Registrp</div>
+      	<div class = "header">Registro</div>
       	<div class = "ui center aligned grid">
       		<!---<div class = "ui medium image" v-on:click = "uploadImg()">
 				<img src="img/imageNo.jpg" id = "imageUsuario">
